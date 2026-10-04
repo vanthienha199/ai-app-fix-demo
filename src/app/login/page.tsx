@@ -1,24 +1,22 @@
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+export const metadata = { title: "Staff sign in | Mossy Paws" };
 
-export default function Login() {
-  const [pw, setPw] = useState("");
-  const router = useRouter();
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    if (pw === "pawsadmin2024") {
-      localStorage.setItem("auth", "true");
-      router.push("/dashboard");
-    } else {
-      alert("Wrong password");
-    }
-  }
+export default async function Login({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
+  const { error, next } = await searchParams;
   return (
-    <form onSubmit={submit} className="mt-20 w-[400px] mx-auto bg-white p-6 rounded-xl shadow space-y-3">
-      <h1 className="text-2xl font-bold">Staff login</h1>
-      <input type="password" value={pw} onChange={(e) => setPw(e.target.value)} className="w-full border rounded p-2" placeholder="Password" />
-      <button className="w-full bg-blue-600 text-white rounded p-2">Log in</button>
-    </form>
+    <main className="mx-auto max-w-sm px-4 py-16 sm:py-24">
+      <form action="/api/login" method="post" className="card p-6 sm:p-8 space-y-5">
+        <div>
+          <h1 className="font-display font-bold text-2xl tracking-tight">Staff sign in</h1>
+          <p className="mt-1 text-sm text-muted">Bookings and customer details are only visible to staff.</p>
+        </div>
+        <input type="hidden" name="next" value={next ?? "/admin"} />
+        <div>
+          <label htmlFor="password" className="block text-sm font-medium mb-1.5">Password</label>
+          <input id="password" name="password" type="password" required autoComplete="current-password" className="field" aria-invalid={!!error} />
+          {error && <p className="mt-1 text-sm text-bad" role="alert">That password did not match. Try again.</p>}
+        </div>
+        <button className="btn w-full">Sign in</button>
+      </form>
+    </main>
   );
 }
