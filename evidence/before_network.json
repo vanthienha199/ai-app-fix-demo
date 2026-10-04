@@ -1,0 +1,8 @@
+{
+  "bookingsPayloadBytes": 5778915,
+  "bookingsRows": 38400,
+  "msForBookingsList": 147,
+  "customerRequests": 300,
+  "msUntilAllNamesFetched": 1554,
+  "openWithoutLogin": 200
+}

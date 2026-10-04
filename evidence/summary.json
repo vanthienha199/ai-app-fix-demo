@@ -1,0 +1,26 @@
+{
+  "measured_on": "2026-10-04, MacBook, Next.js 15.5, same 38,400 synthetic bookings",
+  "before_dev": {
+    "mobile_page_width_px_at_390": 1101,
+    "secret_key_in_client_bundle": "mailpost_live_ key found in static/chunks/app/page.js",
+    "staff_login_lands_on": "/dashboard (404)",
+    "bookings_api_without_login": 200,
+    "dashboard_payload_bytes": 5778915,
+    "customer_requests_per_dashboard_load": 300,
+    "ms_until_names_shown": 6846,
+    "ms_per_search_keystroke": 705,
+    "next_build": "fails (type error)"
+  },
+  "after_dev": { "mobile_page_width_px_at_390": 390, "ms_until_names_shown": 128, "ms_for_filtered_search": 128 },
+  "after_prod": {
+    "dashboard_transfer_bytes": 88388,
+    "customer_requests_per_dashboard_load": 0,
+    "ms_until_names_shown": 82,
+    "ms_for_filtered_search": 77,
+    "bookings_api_without_login": 401,
+    "secret_strings_in_client_bundle": 0,
+    "next_build": "passes",
+    "unit_tests": "19/19",
+    "smoke_checks": "11/11"
+  }
+}

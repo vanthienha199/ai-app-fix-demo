@@ -1,0 +1,12 @@
+PASS signed-out visit to /admin redirects to sign in
+PASS bookings API refuses signed-out callers
+PASS old open bookings list is gone
+PASS old hardcoded password no longer works
+PASS staff sign in lands on /admin with an httpOnly cookie
+PASS signed-in /admin renders the bookings page  (18 ms, 85.4 KB html)
+PASS API returns one filtered page  (5990 bytes)
+PASS slots endpoint lists open times
+PASS bad booking returns field errors
+PASS valid booking is created
+PASS no secret strings in the client bundle  (41 files scanned)
+11/11 smoke checks passed

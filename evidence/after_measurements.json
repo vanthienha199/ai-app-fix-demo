@@ -1,0 +1,10 @@
+{
+  "mobileScrollWidth_dark": 390,
+  "mobileScrollWidth_light": 390,
+  "adminRedirect": "http://localhost:3312/login?next=%2Fadmin",
+  "adminMsAfterLogin": 3569,
+  "adminTransferBytes": 88388,
+  "customerRequests": 0,
+  "adminUrl": "http://localhost:3312/admin",
+  "adminMobileScrollWidth": 390
+}

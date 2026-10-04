@@ -1,0 +1,24 @@
+   ▲ Next.js 15.5.27
+   - Environments: .env
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 853ms
+   Linting and checking validity of types ...
+
+./src/app/admin/page.tsx
+24:6  Warning: React Hook useEffect has a missing dependency: 'router'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+Failed to compile.
+
+./src/app/admin/page.tsx:27:9
+Type error: Type 'string' is not assignable to type 'number'.
+
+[0m [90m 25 |[39m
+ [90m 26 |[39m   [36mconst[39m filtered [33m=[39m bookings[33m.[39mfilter((b) [33m=>[39m [33mJSON[39m[33m.[39mstringify(b)[33m.[39mtoLowerCase()[33m.[39mincludes(q[33m.[39mtoLowerCase()))[33m;[39m
+[31m[1m>[22m[39m[90m 27 |[39m   [36mconst[39m revenue[33m:[39m number [33m=[39m filtered[33m.[39mreduce((s[33m,[39m b) [33m=>[39m s [33m+[39m b[33m.[39mprice[33m,[39m [32m"0"[39m)[33m;[39m
+ [90m    |[39m         [31m[1m^[22m[39m
+ [90m 28 |[39m
+ [90m 29 |[39m   [36mreturn[39m (
+ [90m 30 |[39m     [33m<[39m[33mmain[39m className[33m=[39m[32m"py-10"[39m[33m>[39m[0m
+Next.js build worker exited with code: 1 and signal: null
