@@ -1,0 +1,32 @@
+[
+  {
+    "id": "bath",
+    "name": "Bath and brush",
+    "minutes": 45,
+    "price": 48
+  },
+  {
+    "id": "full",
+    "name": "Full groom",
+    "minutes": 90,
+    "price": 86
+  },
+  {
+    "id": "puppy",
+    "name": "Puppy intro",
+    "minutes": 30,
+    "price": 35
+  },
+  {
+    "id": "nails",
+    "name": "Nail trim",
+    "minutes": 15,
+    "price": 18
+  },
+  {
+    "id": "deshed",
+    "name": "De-shed treatment",
+    "minutes": 60,
+    "price": 64
+  }
+]
