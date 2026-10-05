@@ -1,37 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #15171B; --surface: #1E2126; --surface-2: #262A30; --line: #2E3238; --ink: #F3EFE7; --muted: #A7A39B; --faint: #6F6B64;
-  --accent: #F2994A; --accent-ink: #15171B; --accent-soft: rgba(242,153,74,.14);
-  --ok: #7FD1A0; --ok-soft: rgba(127,209,160,.12); --warn: #F2C14A; --warn-soft: rgba(242,193,74,.13); --bad: #F08A8A; --bad-soft: rgba(240,138,138,.12);
-}
-:root[data-theme="light"] {
-  --bg: #F6F3EE; --surface: #FFFFFF; --surface-2: #F1ECE4; --line: #E5DED3; --ink: #1B1C1F; --muted: #6E6A63; --faint: #9A958C;
-  --accent: #D9772A; --accent-ink: #FFFFFF; --accent-soft: rgba(217,119,42,.12);
-  --ok: #1F7A4A; --ok-soft: #DDF3E5; --warn: #8A5A07; --warn-soft: #FBEFD2; --bad: #B4233A; --bad-soft: #FCE3E6;
+  --bg: #FBF6EC; --surface: #FFFDF8; --surface-2: #F3ECDD; --line: #E6DDCB; --ink: #2A2620; --muted: #6E665A; --faint: #9C9384;
+  --accent: #4F7A3A; --accent-ink: #FFFFFF; --accent-soft: #E7EFDF;
+  --ok: #4F7A3A; --ok-soft: #E7EFDF; --warn: #8A5A07; --warn-soft: #F8ECD2; --bad: #A3362A; --bad-soft: #F8E4DF;
 }
 
 @theme inline {
   --color-bg: var(--bg); --color-surface: var(--surface); --color-surface-2: var(--surface-2); --color-line: var(--line);
   --color-ink: var(--ink); --color-muted: var(--muted); --color-faint: var(--faint); --color-accent: var(--accent); --color-accent-ink: var(--accent-ink); --color-accent-soft: var(--accent-soft);
   --color-ok: var(--ok); --color-ok-soft: var(--ok-soft); --color-warn: var(--warn); --color-warn-soft: var(--warn-soft); --color-bad: var(--bad); --color-bad-soft: var(--bad-soft);
-  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-bricolage), Georgia, serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
-  --radius-card: 10px;
+  --font-sans: var(--font-nunito), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-gabarito), ui-sans-serif, system-ui, sans-serif;
 }
 
-body { background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
-.num { font-family: var(--font-jetbrains), ui-monospace, monospace; font-variant-numeric: tabular-nums; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 10px; font-weight: 600; padding: 11px 18px; background: var(--accent); color: var(--accent-ink); transition: transform .15s ease-out, filter .15s ease-out; }
-.btn:hover { filter: brightness(1.06); }
+body { background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; font-variant-numeric: tabular-nums; }
+h1, h2, h3 { font-family: var(--font-gabarito), sans-serif; font-weight: 800; letter-spacing: -0.015em; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-weight: 700; padding: 12px 22px; background: var(--accent); color: var(--accent-ink); transition: transform .15s ease-out, background .15s ease-out; }
+.btn:hover { background: #426832; }
 .btn:active { transform: scale(.97); }
-.btn:disabled { opacity: .6; cursor: progress; }
-.btn-ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
-.field { width: 100%; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); padding: 10px 12px; font-size: 15px; transition: border-color .15s ease-out; }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
+.btn-ghost:hover { background: var(--surface-2); }
+.field { width: 100%; border-radius: 12px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); padding: 11px 14px; font-size: 16px; transition: border-color .15s ease-out; }
 .field:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
 .field[aria-invalid="true"] { border-color: var(--bad); }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; }
-.skeleton { background: linear-gradient(90deg, var(--surface-2), var(--surface), var(--surface-2)); background-size: 200% 100%; animation: shimmer 1.2s ease-in-out infinite; border-radius: 6px; }
+.card { background: var(--surface); border: 1.5px solid var(--line); border-radius: 18px; }
+.skeleton { background: linear-gradient(90deg, var(--surface-2), var(--surface), var(--surface-2)); background-size: 200% 100%; animation: shimmer 1.2s ease-in-out infinite; border-radius: 12px; }
 @keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
-@media (prefers-reduced-motion: reduce) { .skeleton { animation: none; } .btn { transition: none; } }
+@keyframes paw { 0% { transform: scale(1.15); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.paw { animation: paw 220ms cubic-bezier(.2,1.4,.4,1) both; }
+@media (prefers-reduced-motion: reduce) { .skeleton, .paw { animation: none; } .btn { transition: none; } }

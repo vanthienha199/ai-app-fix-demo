@@ -23,7 +23,7 @@ if (PASSWORD) {
   const t0 = performance.now();
   r = await fetch(BASE + "/admin", { headers: { cookie } });
   const html = await r.text();
-  check("signed-in /admin renders the bookings page", r.status === 200 && html.includes("Matching bookings"), `${Math.round(performance.now() - t0)} ms, ${(html.length / 1024).toFixed(1)} KB html`);
+  check("signed-in /admin renders the bookings page", r.status === 200 && html.includes("bookings match"), `${Math.round(performance.now() - t0)} ms, ${(html.length / 1024).toFixed(1)} KB html`);
   r = await fetch(BASE + "/api/admin/bookings?status=confirmed&pageSize=25", { headers: { cookie } });
   const j = await r.json();
   check("API returns one filtered page", r.ok && j.items.length === 25 && j.items.every((b) => b.status === "confirmed"), `${JSON.stringify(j).length} bytes`);

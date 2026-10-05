@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 export const metadata = { title: "Bookings | Mossy Paws staff" };
 
 const STATUSES = ["", "confirmed", "pending", "completed", "cancelled", "no_show"];
-const TONE: Record<string, string> = { confirmed: "bg-ok-soft text-ok", completed: "bg-surface-2 text-muted", pending: "bg-warn-soft text-warn", cancelled: "bg-bad-soft text-bad", no_show: "bg-bad-soft text-bad" };
+const TONE: Record<string, string> = { confirmed: "text-ok", completed: "text-muted", pending: "text-warn", cancelled: "text-bad", no_show: "text-bad" };
 
 type SP = { q?: string; status?: string; from?: string; to?: string; page?: string };
 
@@ -21,19 +21,10 @@ export default async function Admin({ searchParams }: { searchParams: Promise<SP
     <main className="mx-auto max-w-6xl px-4 sm:px-8 py-8 sm:py-12">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="font-display font-extrabold text-3xl sm:text-5xl tracking-tight">Bookings</h1>
-          <p className="mt-1 text-muted">Filtered on the server, 25 rows per page.</p>
+          <h1 className="text-4xl sm:text-5xl">Bookings</h1>
+          <p className="mt-1 text-muted">{r.total.toLocaleString("en-US")} bookings match, ${r.revenue.toLocaleString("en-US")} booked. Loaded in {ms.toFixed(1)} ms.</p>
         </div>
         <form action="/api/logout" method="post"><button className="btn btn-ghost text-sm">Sign out</button></form>
-      </div>
-
-      <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
-        {[["Matching bookings", r.total.toLocaleString("en-US")], ["Booked revenue", usd(r.revenue)], ["Page", `${r.page} of ${r.pages.toLocaleString("en-US")}`], ["Query time", `${ms.toFixed(1)} ms`]].map(([k, v]) => (
-          <div key={k} className="card px-4 py-3">
-            <p className="font-mono text-[11px] uppercase tracking-wider text-muted">{k}</p>
-            <p className={`num text-xl sm:text-2xl mt-1 ${k === "Booked revenue" ? "text-accent" : ""}`}>{v}</p>
-          </div>
-        ))}
       </div>
 
       <form className="mt-6 card p-4 grid gap-3 sm:grid-cols-[1.4fr_1fr_1fr_1fr_auto] items-end">
@@ -46,7 +37,7 @@ export default async function Admin({ searchParams }: { searchParams: Promise<SP
 
       {r.items.length === 0 ? (
         <div className="mt-6 card p-10 text-center">
-          <p className="font-display font-bold text-xl">No bookings match</p>
+          <p className="font-display text-2xl">No bookings match</p>
           <p className="mt-1 text-muted">Try a wider date range or clear the search.</p>
           <Link href="/admin" className="btn btn-ghost mt-5">Clear filters</Link>
         </div>
@@ -54,19 +45,19 @@ export default async function Admin({ searchParams }: { searchParams: Promise<SP
         <>
           <div className="mt-6 card overflow-hidden hidden md:block">
             <table className="w-full text-left text-[15px]">
-              <thead className="bg-surface-2 font-mono text-[11px] uppercase tracking-wider text-muted">
+              <thead className="bg-surface-2 text-sm text-muted">
                 <tr>{["When", "Customer", "Dog", "Service", "Groomer", "Status", "Price"].map((h) => <th key={h} className={`px-4 py-3 font-semibold ${h === "Price" ? "text-right" : ""}`}>{h}</th>)}</tr>
               </thead>
               <tbody>
                 {r.items.map((b) => (
                   <tr key={b.id} className="border-t border-line">
-                    <td className="px-4 py-3 num text-sm whitespace-nowrap">{b.date} <span className="text-muted">{b.time}</span></td>
+                    <td className="px-4 py-3 text-sm whitespace-nowrap">{b.date} <span className="text-muted">{b.time}</span></td>
                     <td className="px-4 py-3">{b.customerName}</td>
                     <td className="px-4 py-3 text-muted">{b.dog}</td>
                     <td className="px-4 py-3">{b.serviceName}</td>
                     <td className="px-4 py-3">{b.staff}</td>
-                    <td className="px-4 py-3"><span className={`rounded-[10px] px-2.5 py-1 text-xs font-semibold capitalize ${TONE[b.status] ?? ""}`}>{b.status.replace("_", " ")}</span></td>
-                    <td className="px-4 py-3 num text-right">${b.price}</td>
+                    <td className="px-4 py-3"><span className={`font-bold capitalize ${TONE[b.status] ?? ""}`}>{b.status.replace("_", " ")}</span></td>
+                    <td className="px-4 py-3 text-right font-semibold">${b.price}</td>
                   </tr>
                 ))}
               </tbody>
@@ -77,19 +68,19 @@ export default async function Admin({ searchParams }: { searchParams: Promise<SP
               <li key={b.id} className="card p-4">
                 <div className="flex items-center justify-between gap-3">
                   <p className="font-medium">{b.customerName}</p>
-                  <span className={`rounded-[10px] px-2.5 py-1 text-xs font-semibold capitalize ${TONE[b.status] ?? ""}`}>{b.status.replace("_", " ")}</span>
+                  <span className={`font-bold capitalize ${TONE[b.status] ?? ""}`}>{b.status.replace("_", " ")}</span>
                 </div>
                 <p className="text-sm text-muted mt-0.5">{b.dog}</p>
                 <div className="mt-3 flex items-center justify-between text-sm">
                   <span>{b.serviceName} · {b.staff}</span>
-                  <span className="num">{b.date} {b.time} · ${b.price}</span>
+                  <span>{b.date} {b.time}, ${b.price}</span>
                 </div>
               </li>
             ))}
           </ul>
           <nav className="mt-6 flex items-center justify-between text-sm">
             {r.page > 1 ? <Link className="btn btn-ghost" href={link(r.page - 1)}>Previous</Link> : <span />}
-            <span className="text-muted num">{((r.page - 1) * r.pageSize + 1).toLocaleString("en-US")} to {Math.min(r.page * r.pageSize, r.total).toLocaleString("en-US")} of {r.total.toLocaleString("en-US")}</span>
+            <span className="text-muted">{((r.page - 1) * r.pageSize + 1).toLocaleString("en-US")} to {Math.min(r.page * r.pageSize, r.total).toLocaleString("en-US")} of {r.total.toLocaleString("en-US")}</span>
             {r.page < r.pages ? <Link className="btn btn-ghost" href={link(r.page + 1)}>Next</Link> : <span />}
           </nav>
         </>

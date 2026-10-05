@@ -6,7 +6,7 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
     <main className="mx-auto max-w-sm px-4 py-16 sm:py-24">
       <form action="/api/login" method="post" className="card p-6 sm:p-8 space-y-5">
         <div>
-          <h1 className="font-display font-bold text-2xl tracking-tight">Staff sign in</h1>
+          <h1 className="text-3xl">Staff sign in</h1>
           <p className="mt-1 text-sm text-muted">Bookings and customer details are only visible to staff.</p>
         </div>
         <input type="hidden" name="next" value={next ?? "/admin"} />

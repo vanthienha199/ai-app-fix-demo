@@ -1,40 +1,32 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, IBM_Plex_Sans, JetBrains_Mono } from "next/font/google";
+import { Gabarito, Nunito_Sans } from "next/font/google";
 import Link from "next/link";
-import ThemeToggle from "@/components/ThemeToggle";
 
-const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage", weight: ["600", "700", "800"] });
-const plex = IBM_Plex_Sans({ subsets: ["latin"], variable: "--font-plex", weight: ["400", "500", "600"] });
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains", weight: ["500", "600"] });
+const gabarito = Gabarito({ subsets: ["latin"], variable: "--font-gabarito", weight: ["800"] });
+const nunito = Nunito_Sans({ subsets: ["latin"], variable: "--font-nunito", weight: ["400", "600", "700"] });
 
-export const metadata: Metadata = { title: "Mossy Paws Grooming", description: "Book a grooming appointment. Sample app, fictional business." };
+export const metadata: Metadata = { title: "Mossy Paws Grooming", description: "Book a grooming appointment in Larkspur Heights." };
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };
-
-const themeScript = `(()=>{try{const q=new URLSearchParams(location.search).get("theme");const t=q||localStorage.getItem("theme");document.documentElement.dataset.theme=t==="light"?"light":"dark"}catch(e){document.documentElement.dataset.theme="dark"}})()`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bricolage.variable} ${plex.variable} ${jetbrains.variable}`} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
-      </head>
-      <body className="font-sans min-h-screen">
-        <header className="border-b border-line">
-          <div className="mx-auto max-w-6xl px-4 sm:px-8 h-16 flex items-center justify-between gap-3">
-            <Link href="/" className="flex items-center gap-2.5 font-display font-bold text-lg tracking-tight">
-              <span className="grid place-items-center size-8 rounded-[10px] bg-accent text-accent-ink text-base">M</span>
+    <html lang="en" className={`${gabarito.variable} ${nunito.variable}`}>
+      <body className="font-sans min-h-screen flex flex-col">
+        <header>
+          <div className="mx-auto max-w-5xl px-5 sm:px-8 h-20 flex items-center justify-between gap-3">
+            <Link href="/" className="flex items-center gap-2.5 font-display font-extrabold text-xl tracking-tight">
+              <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><g fill="#4F7A3A"><ellipse cx="16" cy="21" rx="7" ry="6" /><circle cx="7.5" cy="13" r="3.2" /><circle cx="13" cy="8" r="3.2" /><circle cx="19" cy="8" r="3.2" /><circle cx="24.5" cy="13" r="3.2" /></g></svg>
               Mossy Paws
             </Link>
-            <nav className="flex items-center gap-1 text-sm">
-              <span className="hidden md:inline-flex items-center gap-2 mr-2 rounded-[10px] bg-warn-soft text-warn px-2.5 py-1 font-mono text-[11px] tracking-wider uppercase">Sample app, fictional business</span>
-              <Link href="/" className="px-3 py-2 rounded-[10px] text-muted hover:text-ink">Book</Link>
-              <Link href="/admin" className="px-3 py-2 rounded-[10px] text-muted hover:text-ink">Staff</Link>
-              <ThemeToggle />
+            <nav className="flex items-center gap-1 text-[15px] font-semibold">
+              <Link href="/" className="px-3 py-2 rounded-full text-muted hover:text-ink">Book</Link>
+              <Link href="/admin" className="px-3 py-2 rounded-full text-muted hover:text-ink">Staff</Link>
             </nav>
           </div>
         </header>
-        {children}
+        <div className="flex-1">{children}</div>
+        <footer className="mx-auto max-w-5xl w-full px-5 sm:px-8 py-8 text-sm text-faint">Fictional business, invented data. Dog photos are CC0 from Wikimedia Commons.</footer>
       </body>
     </html>
   );

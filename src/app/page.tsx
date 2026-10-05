@@ -7,26 +7,14 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ s
   const services = listServices();
   const preselect = services.some((s) => s.id === service) ? service! : "full";
   return (
-    <main className="mx-auto max-w-6xl px-4 sm:px-8 py-10 sm:py-16 grid gap-10 lg:grid-cols-[1fr_1.05fr] items-start">
-      <section>
-        <p className="font-mono text-xs tracking-[.14em] uppercase text-accent">Grooming in Larkspur Heights</p>
-        <h1 className="mt-3 font-display font-extrabold text-4xl sm:text-6xl leading-[1.02] tracking-tight">A calm, clean pup in about an hour.</h1>
-        <p className="mt-4 text-muted text-lg max-w-md">Pick a service and a time. We confirm by email and remind you the day before.</p>
-        <ul className="mt-8 card divide-y divide-[var(--line)]">
-          {services.map((s) => (
-            <li key={s.id} className="flex items-center justify-between gap-4 px-5 py-4">
-              <div>
-                <p className="font-medium">{s.name}</p>
-                <p className="text-sm text-muted">{s.minutes} min</p>
-              </div>
-              <p className="num text-lg">${s.price}</p>
-            </li>
-          ))}
-        </ul>
-      </section>
-      <Suspense fallback={<div className="card p-6"><div className="skeleton h-80" /></div>}>
-        <BookingForm services={services} preselect={preselect} />
-      </Suspense>
+    <main className="mx-auto max-w-5xl px-5 sm:px-8 pt-4 pb-10">
+      <h1 className="text-5xl sm:text-7xl leading-[0.95] max-w-3xl">Book a groom in three steps</h1>
+      <p className="mt-4 text-lg text-muted max-w-xl">Rosa, Dev, Kit and Amara groom about 50 dogs a week in Larkspur Heights. Pick your dog, a service and a time.</p>
+      <div className="mt-8">
+        <Suspense fallback={<div className="skeleton h-96" />}>
+          <BookingForm services={services} preselect={preselect} />
+        </Suspense>
+      </div>
     </main>
   );
 }
